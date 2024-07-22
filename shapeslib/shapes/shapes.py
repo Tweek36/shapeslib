@@ -17,7 +17,14 @@ class Triangle(Shape):
         self.a = a
         self.b = b
         self.c = c
-
+        if not self._is_valid_triangle():
+            raise ValueError("The given sides do not form a valid triangle.")
+    
+    def _is_valid_triangle(self):
+        if self.a <= 0 or self.b <= 0 or self.c <= 0:
+            return False
+        return (self.a + self.b > self.c) and (self.a + self.c > self.b) and (self.b + self.c > self.a)
+    
     def area(self):
         s = (self.a + self.b + self.c) / 2
         return math.sqrt(s * (s - self.a) * (s - self.b) * (s - self.c))
